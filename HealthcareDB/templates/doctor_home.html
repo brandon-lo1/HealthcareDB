@@ -1,33 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
-        body { font-family: Arial, sans-serif; margin: 0; padding: 0; }
-        header, footer { background-color: #f1f1f1; padding: 20px; text-align: center; }
-        nav { background: #333; color: #fff; padding: 10px; }
-        nav ul { list-style-type: none; padding: 0; }
-        nav ul li { display: inline; margin-right: 10px; }
-        nav ul li a { color: white; text-decoration: none; }
-        main { padding: 20px; }
-    </style>
-    <title>Home Page</title>
-</head>
-<body>
-    <header>
-        <h1>Doctor Home Page</h1>
-    </header>
-    <nav>
-        <ul>
-            <li><a href="#">Home</a></li>
-            <li><a href="#">Appointments</a></li>
-            <li><a href="#">Services</a></li>
-            <li><a href="#">Contact</a></li>
-        </ul>
-    </nav>
-    <main>
-        <h2>Hello, {{ name }}!</h2>
-        <p>This is a paragraph of text to introduce visitors to the website. You can add more content here such as an introduction to what your website is about or some highlights of your content or services.</p>
-    </main>
-</body>
+{% extends 'doctor_base.html' %}
+
+{% block title %}Doctor Home Page{% endblock %}
+
+{% block header %}Home Page{% endblock %}
+
+{% block content %}
+    <h2>Hello, Dr. {{ name }}!</h2>
+    <p>Welcome to your healthcare database, click on one of the sections above to navigate there.</p>
+{% endblock %}

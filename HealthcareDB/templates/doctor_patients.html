@@ -1,0 +1,21 @@
+{% extends "doctor_base.html" %}
+
+{% block title %}Doctor Patients Page{% endblock %}
+
+{% block header %}Patients{% endblock %}
+
+{% block content %}
+    <h2>Your Patients</h2>
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Details</th>
+        </tr>
+        {% for patient in patients %}
+        <tr>
+            <td>{{ patient[1] }} {{ patient[2] }}</td>
+            <td><a href="/patient/{{ patient[0] }}" class="btn">View Details</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+{% endblock %}

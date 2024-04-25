@@ -1,0 +1,44 @@
+{% extends "doctor_base.html" %}
+
+{% block title %}Doctor Appointments Page{% endblock %}
+
+{% block header %}Appointments{% endblock %}
+
+{% block content %}
+    <h2>Upcoming Appointments for Dr. {{ name }}</h2>
+    <table>
+        <tr>
+            <th>Patient Name</th>
+            <th>Date</th>
+            <th>Time</th>
+        </tr>
+        {% for appointment in future_appointments %}
+        <tr>
+            <td>{{ appointment[0] }} {{ appointment[1] }}</td>
+            <td>{{ appointment[2] }}</td>
+            <td>{{ appointment[3] }}</td>
+        </tr>
+        {% endfor %}
+        {% if not future_appointments %}
+            <p>No upcoming appointments.</p>
+        {% endif %}
+    </table>
+    <h2>Past Appointments for Dr. {{ name }}</h2>
+    <table>
+        <tr>
+            <th>Patient Name</th>
+            <th>Date</th>
+            <th>Time</th>
+        </tr>
+        {% for appointment in past_appointments %}
+        <tr>
+            <td>{{ appointment[0] }} {{ appointment[1] }}</td>
+            <td>{{ appointment[2] }}</td>
+            <td>{{ appointment[3] }}</td>
+        </tr>
+        {% endfor %}
+        {% if not past_appointments %}
+            <p>No past appointments.</p>
+        {% endif %}
+    </table>
+{% endblock %}
