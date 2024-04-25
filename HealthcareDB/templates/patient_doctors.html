@@ -1,0 +1,37 @@
+{% extends "patient_base.html" %}
+
+{% block title %}Patient Doctors Page{% endblock %}
+
+{% block header %}Doctors{% endblock %}
+
+{% block content %}
+    <h2>Available Doctors</h2>
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Specialty</th>
+            <th>Average Rating</th>
+            <th>Add a Rating</th>
+        </tr>
+        {% for doctor in doctors %}
+        <tr>
+            <td>Dr. {{ doctor[1] }} {{ doctor[2] }}</td>
+            <td>{{ doctor[3] }}</td>
+            <td>{{ '%0.2f' | format(doctor[4]) }}</td>
+            <td>
+                <form action="{{ url_for('submit_rating', doctor_id=doctor[0]) }}" method="post">
+                    <select name="rating" required>
+                        <option value="">Choose a rating</option>
+                        <option value="1">1 - Poor</option>
+                        <option value="2">2 - Fair</option>
+                        <option value="3">3 - Good</option>
+                        <option value="4">4 - Very Good</option>
+                        <option value="5">5 - Excellent</option>
+                    </select>
+                    <button type="submit">Submit Rating</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+{% endblock %}

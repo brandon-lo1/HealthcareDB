@@ -5,108 +5,120 @@
 {% block header %}Patient Detailed Information{% endblock %}
 
 {% block content %}
-    <h2>Patient: {{ patient_name[0] }} {{ patient_name[1] }}</h2>
+<h1>Patient: {{ patient_name[0] }} {{ patient_name[1] }}</h1>
 
-    <section>
-        <h3>Past Visits</h3>
-        <table>
-            <tr>
-                <th>Doctor</th>
-                <th>Date</th>
-                <th>Time</th>
-            </tr>
-            {% for visit in past_visits %}
-            <tr>
-                <td>{{ visit[0] }} {{ visit[1] }}</td>
-                <td>{{ visit[2] }}</td>
-                <td>{{ visit[3] }}</td>
-            </tr>
-            {% endfor %}
-        </table>
-    </section>
+<h2>Past Visits</h2>
+<section>
+    <table>
+        <tr>
+            <th>Doctor</th>
+            <th>Date</th>
+            <th>Time</th>
+        </tr>
+        {% for visit in past_visits %}
+        <tr>
+            <td>{{ visit[0] }} {{ visit[1] }}</td>
+            <td>{{ visit[2] }}</td>
+            <td>{{ visit[3] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</section>
 
-    <section>
-        <h3>Future Visits</h3>
-        <table>
-            <tr>
-                <th>Doctor</th>
-                <th>Date</th>
-                <th>Time</th>
-            </tr>
-            {% for visit in future_visits %}
-            <tr>
-                <td>{{ visit[0] }} {{ visit[1] }}</td>
-                <td>{{ visit[2] }}</td>
-                <td>{{ visit[3] }}</td>
-            </tr>
-            {% endfor %}
-        </table>
-    </section>
+<h2>Future Visits</h2>
+<section>
+    <table>
+        <tr>
+            <th>Doctor</th>
+            <th>Date</th>
+            <th>Time</th>
+        </tr>
+        {% for visit in future_visits %}
+        <tr>
+            <td>{{ visit[0] }} {{ visit[1] }}</td>
+            <td>{{ visit[2] }}</td>
+            <td>{{ visit[3] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</section>
 
-    <section>
-        <h3>Medications</h3>
-        <table>
-            <tr>
-                <th>Medication</th>
-                <th>Prescribing Doctor</th>
-            </tr>
-            {% for medication in medications %}
-            <tr>
-                <td>{{ medication[0] }}</td>
-                <td>{{ medication[1] }} {{ medication[2] }}</td>
-            </tr>
-            {% endfor %}
-        </table>
-    </section>
+<h2>Medications</h2>
+<section>
+    <table>
+        <tr>
+            <th>Medication</th>
+            <th>Prescribing Doctor</th>
+        </tr>
+        {% for medication in medications %}
+        <tr>
+            <td>{{ medication[0] }}</td>
+            <td>{{ medication[1] }} {{ medication[2] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</section>
 
-    <section>
-        <h3>Allergies</h3>
-        <table>
-            <tr>
-                <th>Allergy</th>
-            </tr>
-            {% for allergy in allergies %}
-            <tr>
-                <td>{{ allergy[0] }}</td>
-            </tr>
-            {% endfor %}
-        </table>
-    </section>
+<h2>Allergies</h2>
+<section>
+    <table>
+        <tr>
+            <th>Allergy</th>
+        </tr>
+        {% for allergy in allergies %}
+        <tr>
+            <td>{{ allergy[0] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</section>
 
-    <section>
-        <h3>Lab Tests</h3>
-        <table>
-            <tr>
-                <th>Test Type</th>
-                <th>Result</th>
-                <th>Performed By</th>
-            </tr>
-            {% for lab in labs %}
-            <tr>
-                <td>{{ lab[0] }}</td>
-                <td>{{ lab[1] }}</td>
-                <td>{{ lab[2] }} {{ lab[3] }}</td>
-            </tr>
-            {% endfor %}
-        </table>
-    </section>
+<h2>Lab Tests</h2>
+<section>
+    <table>
+        <tr>
+            <th>Test Type</th>
+            <th>Result</th>
+            <th>Performed By</th>
+        </tr>
+        {% for lab in labs %}
+        <tr>
+            <td>{{ lab[0] }}</td>
+            <td>{{ lab[1] }}</td>
+            <td>{{ lab[2] }} {{ lab[3] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</section>
 
-    <section>
-        <h3>Insurance Claims</h3>
-        <table>
-            <tr>
-                <th>Insurance Company</th>
-                <th>Appointment Date</th>
-                <th>Doctor</th>
-            </tr>
-            {% for claim in insurance %}
-            <tr>
-                <td>{{ claim[0] }}</td>
-                <td>{{ claim[1] }}</td>
-                <td>{{ claim[2] }} {{ claim[3] }}</td>
-            </tr>
-            {% endfor %}
-        </table>
-    </section>
+<form action="" method="get">
+    <label for="test_type_filter">Filter by Lab Test Type:</label>
+    <select name="test_type_filter" onchange="this.form.submit()">
+        <option value="">Select a Lab Test Type</option>
+        {% for type in lab_test_types %}
+        <option value="{{ type[0] }}" {% if type[0] == selected_test_type %}selected{% endif %}>
+            {{ type[0] }}
+        </option>
+        {% endfor %}
+    </select>
+    <button type="submit" name="test_type_filter" value="" onclick="document.getElementById('test_type_filter').value=''; this.form.submit();">Clear Filter</button>
+</form>
 
+<h2>Insurance Claims</h2>
+<section>
+    <table>
+        <tr>
+            <th>Insurance Company</th>
+            <th>Appointment Date</th>
+            <th>Doctor</th>
+        </tr>
+        {% for claim in insurance %}
+        <tr>
+            <td>{{ claim[0] }}</td>
+            <td>{{ claim[1] }}</td>
+            <td>{{ claim[2] }} {{ claim[3] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</section>
 {% endblock %}

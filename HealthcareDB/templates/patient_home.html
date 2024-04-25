@@ -1,33 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
-        body { font-family: Arial, sans-serif; margin: 0; padding: 0; }
-        header, footer { background-color: #f1f1f1; padding: 20px; text-align: center; }
-        nav { background: #333; color: #fff; padding: 30px; text-align: center; }
-        nav ul { list-style-type: none; padding: 0; margin: 0; display: inline-block; }
-        nav ul li { display: inline; margin-right: 30px; font-size: 20px; }
-        nav ul li a { color: white; text-decoration: none; }
-        main { padding: 20px; }
-    </style>
-    <title>Home Page</title>
-</head>
-<body>
-    <header>
-        <h1>Patient Home Page</h1>
-    </header>
-    <nav>
-        <ul>
-            <li><a href="/home">Home</a></li>
-            <li><a href="#">Appointments</a></li>
-            <li><a href="#">Services</a></li>
-            <li><a href="#">Contact</a></li>
-        </ul>
-    </nav>
-    <main>
-        <h2>Hello, {{ name }}!</h2>
-        <p>Welcome to your healthcare database, click on one of the sections above to navigate there.</p>
-    </main>
-</body>
+{% extends 'patient_base.html' %}
+
+{% block title %}Patient Home Page{% endblock %}
+
+{% block header %}Home Page{% endblock %}
+
+{% block content %}
+    <h2>Hello, {{ name }}!</h2>
+    <p>Welcome to your healthcare database, the tabs above have the following functionality:</p>
+    <ul>
+        <li>Home: Return to this Home Page at any time</li>
+        <li>Appointments: View your upcoming and past appointments, as well as create new ones</li>
+        <li>Doctors: View a list of available doctors and their average rating by other patients</li>
+        <li>Prescriptions: View a list of your prescribed medications and lab tests</li>
+    </ul>
+    <p>Click on one of the sections to navigate there!</p>
+{% endblock %}

@@ -96,6 +96,17 @@ def create_tables(cursor):
         FOREIGN KEY (lab_id) REFERENCES lab_tests(id) ON UPDATE CASCADE ON DELETE CASCADE)
         ''')
     
+    # Doctor Ratings
+    cursor.execute('''
+    CREATE TABLE IF NOT EXISTS ratings (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        rating INT NOT NULL,
+        patient_id INT NOT NULL,
+        doctor_id INT NOT NULL,
+        FOREIGN KEY (doctor_id) REFERENCES doctors(id) ON UPDATE CASCADE ON DELETE CASCADE,
+        FOREIGN KEY (patient_id) REFERENCES patients(id) ON UPDATE CASCADE ON DELETE CASCADE)
+        ''')
+    
     # MULTI-VALUED ATTRIBUTES
     # Allergies
     cursor.execute('''
@@ -255,7 +266,81 @@ def insert_sample_data(cursor):
         (12, 'Nuts'),
         (12, 'Soy')
     ]
-
+    
+    # List of sample ratings
+    ratings = [
+        (4, 11, 1),
+        (5, 12, 1),
+        (5, 13, 1),
+        (5, 14, 1),
+        (5, 15, 1),
+        (3, 16, 1),
+        (4, 17, 1),
+        (2, 21, 2),
+        (3, 22, 2),
+        (5, 23, 2),
+        (5, 24, 2),
+        (4, 25, 2),
+        (3, 26, 2),
+        (1, 27, 2),
+        (1, 21, 3),
+        (3, 22, 3),
+        (2, 23, 3),
+        (5, 24, 3),
+        (2, 25, 3),
+        (3, 26, 3),
+        (5, 18, 4),
+        (5, 11, 4),
+        (3, 12, 4),
+        (4, 13, 4),
+        (2, 14, 4),
+        (5, 15, 4),
+        (4, 16, 4),
+        (1, 17, 4),
+        (4, 19, 4),
+        (2, 21, 5),
+        (3, 22, 5),
+        (1, 23, 5),
+        (2, 24, 5),
+        (4, 25, 5),
+        (3, 26, 5),
+        (1, 27, 5),
+        (4, 11, 6),
+        (4, 12, 6),
+        (5, 13, 6),
+        (4, 14, 6),
+        (5, 15, 6),
+        (3, 16, 6),
+        (4, 17, 6),
+        (3, 11, 7),
+        (4, 12, 7),
+        (5, 13, 7),
+        (5, 14, 7),
+        (5, 15, 7),
+        (3, 16, 7),
+        (5, 17, 7),
+        (5, 11, 8),
+        (4, 12, 8),
+        (5, 13, 8),
+        (5, 14, 8),
+        (5, 15, 8),
+        (5, 16, 8),
+        (5, 17, 8),
+        (3, 11, 9),
+        (3, 12, 9),
+        (5, 13, 9),
+        (5, 14, 9),
+        (4, 15, 9),
+        (2, 16, 9),
+        (5, 17, 9),
+        (3, 11, 10),
+        (2, 12, 10),
+        (3, 13, 10),
+        (4, 14, 10),
+        (1, 15, 10),
+        (5, 16, 10),
+        (5, 17, 10)
+    ]
 
     # Add doctors to users and doctors table and increment ID
     for doctor in doctors:
@@ -277,6 +362,7 @@ def insert_sample_data(cursor):
     cursor.executemany("INSERT INTO prescribed_med (doctor_id, patient_id, med_id) VALUES (%s, %s, %s)", prescribed_meds)
     cursor.executemany("INSERT INTO prescribed_lab (doctor_id, patient_id, lab_id) VALUES (%s, %s, %s)", prescribed_labs)
     cursor.executemany("INSERT INTO allergies (patient_id, allergy) VALUES (%s, %s)", allergies)
+    cursor.executemany("INSERT INTO ratings (rating, patient_id, doctor_id) VALUES (%s, %s, %s)", ratings)
 
 
 def main():
@@ -303,11 +389,13 @@ def main():
         # cursor.execute('DELETE FROM prescribed_med')
         # cursor.execute('DELETE FROM prescribed_lab')
         # cursor.execute('DELETE FROM allergies')
+        # cursor.execute('DELETE FROM ratings')
         # cursor.execute('ALTER TABLE appointments AUTO_INCREMENT = 1')
         # cursor.execute('ALTER TABLE medications AUTO_INCREMENT = 1')
         # cursor.execute('ALTER TABLE lab_tests AUTO_INCREMENT = 1')
         # cursor.execute('ALTER TABLE insurance_claims AUTO_INCREMENT = 1')
         # cursor.execute('ALTER TABLE allergies AUTO_INCREMENT = 1')
+        # cursor.execute('ALTER TABLE ratings AUTO_INCREMENT = 1')
 
         create_tables(cursor)
         insert_sample_data(cursor)

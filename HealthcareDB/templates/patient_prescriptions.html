@@ -1,0 +1,56 @@
+{% extends "patient_base.html" %}
+
+{% block title %}Prescriptions{% endblock %}
+
+{% block header %}Prescriptions{% endblock %}
+
+{% block content %}
+<h2>Your Medications</h2>
+
+<section>
+    <table>
+        <tr>
+            <th>Medication</th>
+            <th>Prescribing Doctor</th>
+        </tr>
+        {% for medication in medications %}
+        <tr>
+            <td>{{ medication[0] }}</td>
+            <td>{{ medication[1] }} {{ medication[2] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</section>
+
+<h2>Your Lab Tests</h2>
+
+<section>
+    <table>
+        <tr>
+            <th>Test Type</th>
+            <th>Result</th>
+            <th>Performed By</th>
+        </tr>
+        {% for lab in labs %}
+        <tr>
+            <td>{{ lab[0] }}</td>
+            <td>{{ lab[1] }}</td>
+            <td>{{ lab[2] }} {{ lab[3] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</section>
+
+<form action="" method="get">
+    <label for="test_type_filter">Filter by Lab Test Type:</label>
+    <select name="test_type_filter" onchange="this.form.submit()">
+        <option value="">Select a Lab Test Type</option>
+        {% for type in lab_test_types %}
+        <option value="{{ type[0] }}" {% if type[0] == selected_test_type %}selected{% endif %}>
+            {{ type[0] }}
+        </option>
+        {% endfor %}
+    </select>
+    <button type="submit" name="test_type_filter" value="" onclick="document.getElementById('test_type_filter').value=''; this.form.submit();">Clear Filter</button>
+</form>
+{% endblock %}
